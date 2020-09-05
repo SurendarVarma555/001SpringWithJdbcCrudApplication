@@ -1,5 +1,7 @@
 package com.vidvaan.service;
 
+import java.util.List;
+
 import com.vidvaan.model.Employee;
 
 public interface EmployeeService {
