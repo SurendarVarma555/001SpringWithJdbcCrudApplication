@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+<!-- 	<context:property-placeholder -->
+<!-- 		location="db.properties" /> -->
+
+<bean class= "org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+		<property name="location" value="db.properties" > </property> </bean>
+
+	<bean id="driverManagerDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="${url}"></property>
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="username" value="${uname}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+
+	<bean id="employeeservice"
+		class="com.vidvaan.service.EmployeeServiceImpl">
+		<property name="employeedao" ref="employeedao"></property>
+	</bean>
+
+	<bean id="employeedao" class="com.vidvaan.dao.EmployeeDAOImpl">
+		<property name="jdbctemplate" ref="jdbctemplate"></property>
+	</bean>
+
+	<bean id="jdbctemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="driverManagerDataSource"></property>
+	</bean>
+
+</beans>
